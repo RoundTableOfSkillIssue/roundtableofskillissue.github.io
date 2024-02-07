@@ -7,6 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© 2024 Round Table of Skill Issue</copyright>
-    <atom:link href="https://roundtableofskillissue.github.io/series/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 30 Apr 2023 00:00:00 +0700</lastBuildDate><atom:link href="https://roundtableofskillissue.github.io/series/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>pwn 101</title>
+      <link>https://roundtableofskillissue.github.io/series/pwn-101/</link>
+      <pubDate>Sun, 30 Apr 2023 00:00:00 +0700</pubDate>
+      
+      <guid>https://roundtableofskillissue.github.io/series/pwn-101/</guid>
+      <description></description>
+      
+    </item>
+    
   </channel>
 </rss>
