@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on RToSI</title>
+    <link>https://roundtableofskillissue.github.io/tags/</link>
+    <description>Recent content in Tags on RToSI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© 2024 Round Table of Skill Issue</copyright>
+    <lastBuildDate>Sun, 21 Jan 2024 11:00:00 +0000</lastBuildDate><atom:link href="https://roundtableofskillissue.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2024</title>
+      <link>https://roundtableofskillissue.github.io/tags/2024/</link>
+      <pubDate>Sun, 21 Jan 2024 11:00:00 +0000</pubDate>
+      
+      <guid>https://roundtableofskillissue.github.io/tags/2024/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>ctf</title>
+      <link>https://roundtableofskillissue.github.io/tags/ctf/</link>
+      <pubDate>Sun, 21 Jan 2024 11:00:00 +0000</pubDate>
+      
+      <guid>https://roundtableofskillissue.github.io/tags/ctf/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>MAPNA</title>
+      <link>https://roundtableofskillissue.github.io/tags/mapna/</link>
+      <pubDate>Sun, 21 Jan 2024 11:00:00 +0000</pubDate>
+      
+      <guid>https://roundtableofskillissue.github.io/tags/mapna/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>pwn</title>
+      <link>https://roundtableofskillissue.github.io/tags/pwn/</link>
+      <pubDate>Sun, 21 Jan 2024 11:00:00 +0000</pubDate>
+      
+      <guid>https://roundtableofskillissue.github.io/tags/pwn/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>2023</title>
+      <link>https://roundtableofskillissue.github.io/tags/2023/</link>
+      <pubDate>Sat, 11 Nov 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://roundtableofskillissue.github.io/tags/2023/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>BKISC</title>
+      <link>https://roundtableofskillissue.github.io/tags/bkisc/</link>
+      <pubDate>Sat, 11 Nov 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://roundtableofskillissue.github.io/tags/bkisc/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>osint</title>
+      <link>https://roundtableofskillissue.github.io/tags/osint/</link>
+      <pubDate>Tue, 02 May 2023 03:50:54 +0000</pubDate>
+      
+      <guid>https://roundtableofskillissue.github.io/tags/osint/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>UMDCTF</title>
+      <link>https://roundtableofskillissue.github.io/tags/umdctf/</link>
+      <pubDate>Tue, 02 May 2023 03:50:54 +0000</pubDate>
+      
+      <guid>https://roundtableofskillissue.github.io/tags/umdctf/</guid>
+      <description></description>
+      
+    </item>
+    
+  </channel>
+</rss>

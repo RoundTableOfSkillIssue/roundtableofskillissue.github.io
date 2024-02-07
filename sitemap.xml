@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://roundtableofskillissue.github.io/writeup/mapna-ctf-2024/</loc>
+    <lastmod>2024-01-21T11:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://roundtableofskillissue.github.io/</loc>
+    <lastmod>2024-01-21T11:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://roundtableofskillissue.github.io/writeup/</loc>
+    <lastmod>2024-01-21T11:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://roundtableofskillissue.github.io/writeup/bkisc_recruit/</loc>
+    <lastmod>2023-11-11T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://roundtableofskillissue.github.io/writeup/umd-osint/</loc>
+    <lastmod>2023-05-02T03:50:54+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://roundtableofskillissue.github.io/sharing/pwn101/buffer_overflow_1/</loc>
+    <lastmod>2023-04-30T00:00:00+07:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://roundtableofskillissue.github.io/sharing/</loc>
+    <lastmod>2023-04-30T00:00:00+07:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+</urlset>

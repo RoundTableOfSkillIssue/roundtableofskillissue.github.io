@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth" data-default-appearance="dark"
+  data-auto-appearance="true"><head>
+  <meta charset="utf-8" />
+  
+  <meta http-equiv="content-language" content="en" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  
+  <title>Pwn 101: Buffer Overflow Part 1 &middot; RToSI</title>
+  <meta name="title" content="Pwn 101: Buffer Overflow Part 1 &middot; RToSI" />
+  
+  <meta name="description" content="Buffer Overflow là gì? Điều gì gây nên lỗi tràn bộ đệm? Làm sao để khai thác?" />
+  <meta name="keywords" content="pwn, " />
+  
+  
+  <link rel="canonical" href="https://roundtableofskillissue.github.io/sharing/pwn101/buffer_overflow_1/" />
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <link type="text/css" rel="stylesheet" href="/css/main.bundle.min.b0288806655da26e86c7d8b3e25f78417a1cea7863196f89b061503ffe65d9d395293a256cae9b35b71575ce02c40550b39681355f024059649856c3b60137b2.css"
+    integrity="sha512-sCiIBmVdom6Gx9iz4l94QXoc6nhjGW&#43;JsGFQP/5l2dOVKTolbK6bNbcVdc4CxAVQs5aBNV8CQFlkmFbDtgE3sg==" />
+  
+  
+  <script type="text/javascript" src="/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js"
+    integrity="sha512-UWoWdFvqWpvQERONJUzA/TlzzVXObhXz3sdj58fCx0SPj&#43;e1TMqBHLghsMfhLNFhyqzh3XlKw9NNQJN8vMnuEg=="></script>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script defer type="text/javascript" id="script-bundle" src="/js/main.bundle.min.1271c22a557a15f10b5d38d2c87e49503604cfeffebadc1e7c267934e4b9f3ba1b74d81371219f9681dab2141482fc4ed2a8b462b179f0ef43a5f76d0575e85b.js"
+    integrity="sha512-EnHCKlV6FfELXTjSyH5JUDYEz&#43;/&#43;utwefCZ5NOS587obdNgTcSGfloHashQUgvxO0qi0YrF58O9DpfdtBXXoWw==" data-copy="" data-copied=""></script>
+  
+  
+  <script src="/js/zoom.min.js"></script>
+  
+  
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:title" content="Pwn 101: Buffer Overflow Part 1" />
+<meta property="og:description" content="Buffer Overflow là gì? Điều gì gây nên lỗi tràn bộ đệm? Làm sao để khai thác?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://roundtableofskillissue.github.io/sharing/pwn101/buffer_overflow_1/" /><meta property="article:section" content="sharing" />
+<meta property="article:published_time" content="2023-04-30T00:00:00+07:00" />
+<meta property="article:modified_time" content="2023-04-30T00:00:00+07:00" />
+
+
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Pwn 101: Buffer Overflow Part 1"/>
+<meta name="twitter:description" content="Buffer Overflow là gì? Điều gì gây nên lỗi tràn bộ đệm? Làm sao để khai thác?"/>
+
+  
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Sharings",
+    "name": "Pwn 101: Buffer Overflow Part 1",
+    "headline": "Pwn 101: Buffer Overflow Part 1",
+    
+    "abstract": "Buffer Overflow là gì? Điều gì gây nên lỗi tràn bộ đệm? Làm sao để khai thác?",
+    "inLanguage": "en",
+    "url" : "https:\/\/roundtableofskillissue.github.io\/sharing\/pwn101\/buffer_overflow_1\/",
+    "author" : {
+      "@type": "Person",
+      "name": "Round Table of Skill Issue"
+    },
+    "copyrightYear": "2023",
+    "dateCreated": "2023-04-30T00:00:00\u002b07:00",
+    "datePublished": "2023-04-30T00:00:00\u002b07:00",
+    
+    "dateModified": "2023-04-30T00:00:00\u002b07:00",
+    
+    "keywords": ["pwn"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "1708"
+  }]
+  </script>
+
+
+  
+  
+  <meta name="author" content="Round Table of Skill Issue" />
+  
+  
+  
+  <link href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" rel="me" />
+  
+  
+  <link href="https://www.youtube.com/watch?v=fC7oUOUEEi4" rel="me" />
+  
+  
+  
+  
+
+<script src="/lib/jquery/jquery.slim.min.js" integrity=""></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+  <meta name="theme-color"/>
+  
+  
+</head>
+<body
+  class="flex flex-col h-screen px-6 m-auto text-lg leading-7 max-w-7xl bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32">
+  <div id="the-top" class="absolute flex self-center">
+    <a class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600"
+      href="#main-content"><span
+        class="font-bold text-primary-600 ltr:pr-2 rtl:pl-2 dark:text-primary-400">&darr;</span>Skip to main content</a>
+  </div>
+  
+  
+  <div style="padding-left:0;padding-right:0;padding-top:2px;padding-bottom:3px"
+    class="main-menu flex items-center justify-between px-4 py-6 sm:px-6 md:justify-start space-x-3">
+    
+    <div class="flex flex-1 items-center justify-between">
+        <nav class="flex space-x-3">
+
+            
+            <a href="/" class="text-base font-medium text-gray-500 hover:text-gray-900">RToSI</a>
+            
+
+        </nav>
+        <nav class="hidden md:flex items-center space-x-5 md:ml-12 h-12">
+
+            
+            
+            
+  <a href="/sharing/"  class="flex items-center">
+    
+    <p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Sharings">
+        Sharing
+    </p>
+</a>
+
+
+            
+            
+  <a href="/writeup/"  class="flex items-center">
+    
+    <p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Writeups">
+        Writeup
+    </p>
+</a>
+
+
+            
+            
+  <a href="/authors/"  class="flex items-center">
+    
+    <p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Authors">
+        Members
+    </p>
+</a>
+
+
+            
+            
+  <a href=""  class="flex items-center">
+    
+    <p class="text-base font-medium text-gray-500 hover:text-gray-900" title="">
+        
+    </p>
+</a>
+
+
+            
+            
+
+            
+
+
+            
+            <button id="search-button" aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400 h-12"
+                title="">
+                
+
+  <span class="relative block icon">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+
+  </span>
+
+
+            </button>
+            
+
+
+            
+            
+            <div
+                class="ltr:mr-14 rtl:ml-14 cursor-pointer text-sm text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400">
+                <button id="appearance-switcher" aria-label="Dark mode switcher" type="button">
+                    <div class="flex items-center justify-center h-12 dark:hidden">
+                        
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+
+  </span>
+
+
+                    </div>
+                    <div class="items-center justify-center hidden h-12 dark:flex">
+                        
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+
+  </span>
+
+
+                    </div>
+                </button>
+            </div>
+            
+
+        </nav>
+        <div class="flex md:hidden items-center space-x-5 md:ml-12">
+
+            <span></span>
+
+            
+
+
+            
+            <button id="search-button-mobile" aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400"
+                title="">
+                
+
+  <span class="relative block icon">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+
+  </span>
+
+
+            </button>
+            
+
+            
+            
+            <button id="appearance-switcher-mobile" aria-label="Dark mode switcher" type="button" style="margin-right:5px">
+                <div class="flex items-center justify-center h-12 dark:hidden">
+                    
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+
+  </span>
+
+
+                </div>
+                <div class="items-center justify-center hidden h-12 dark:flex">
+                    
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+
+  </span>
+
+
+                </div>
+            </button>
+            
+
+        </div>
+    </div>
+    <div class="-my-2 -mr-2 md:hidden">
+
+        <label id="menu-button" for="menu-controller" class="block">
+            <input type="checkbox" id="menu-controller" class="hidden" />
+            
+            <div class="cursor-pointer hover:text-primary-600 dark:hover:text-primary-400">
+                
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/></svg>
+
+  </span>
+
+
+            </div>
+            <div id="menu-wrapper" style="padding-top:5px;"
+                class="fixed inset-0 z-30 invisible w-screen h-screen m-0 overflow-auto transition-opacity opacity-0 cursor-default bg-neutral-100/50 backdrop-blur-sm dark:bg-neutral-900/50">
+                <ul
+                    class="flex space-y-2 mt-3 flex-col items-end w-full px-6 py-6 mx-auto overflow-visible list-none ltr:text-right rtl:text-left max-w-7xl">
+
+                    <li>
+                        <span
+                            class="cursor-pointer inline-block align-text-bottom hover:text-primary-600 dark:hover:text-primary-400">
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+
+  </span>
+
+</span>
+                    </li>
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/sharing/"  class="flex items-center">
+        
+        <p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Sharings">
+            Sharing
+        </p>
+    </a>
+</li>
+
+
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/writeup/"  class="flex items-center">
+        
+        <p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Writeups">
+            Writeup
+        </p>
+    </a>
+</li>
+
+
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/authors/"  class="flex items-center">
+        
+        <p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Authors">
+            Members
+        </p>
+    </a>
+</li>
+
+
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href=""  class="flex items-center">
+        
+        <p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="">
+            
+        </p>
+    </a>
+</li>
+
+
+
+                    
+
+                </ul>
+                
+                
+
+            </div>
+        </label>
+    </div>
+</div>
+
+
+
+
+
+  
+  <div class="relative flex flex-col grow">
+    <main id="main-content" class="grow">
+      
+
+
+<article>
+  
+
+  <header id="single_header" class="mt-5 max-w-prose">
+    
+    <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+      Pwn 101: Buffer Overflow Part 1
+    </h1>
+    <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+      
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="flex flex-row flex-wrap items-center">
+  
+  
+  <time datetime="2023-04-30 00:00:00 &#43;0700 &#43;07">30 April 2023</time><span class="px-2 text-primary-500">&middot;</span><span>1708 words</span><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">9 mins</span>
+  
+
+  
+  
+</div>
+
+
+
+
+
+<div class="flex flex-row flex-wrap items-center">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/tags/pwn/&#34;,'_self');">
+    <span class="flex" style="cursor: pointer;">
+  <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    pwn
+  </span>
+</span>
+  </span>
+  
+  
+  
+  
+</div>
+
+
+
+    </div>
+
+    
+    
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+  
+  </header>
+  
+  <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
+    
+     <div
+      class="order-first lg:ml-auto px-0 lg:order-last ltr:lg:pl-8 rtl:lg:pr-8">
+      <div class="toc ltr:pl-5 rtl:pr-5 print:hidden lg:sticky lg:top-10">
+
+         <details open class="toc-right mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 hidden lg:block">
+  <summary
+    class="block py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+    Table of Contents
+  </summary>
+  <div
+    class="min-w-[220px] py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#disclaimer">Disclaimer</a></li>
+        <li><a href="#buffer-overflow-là-gì">Buffer Overflow là gì?</a></li>
+        <li><a href="#định-vị-buffer-overflow-như-thế-nào">Định vị Buffer Overflow như thế nào?</a></li>
+        <li><a href="#memory-layout-trên-kiến-trúc-intel">Memory Layout trên kiến trúc Intel</a></li>
+        <li><a href="#việc-nguy-hiểm-khi-sử-dụng-các-hàm-đọc-không-giới-hạn">Việc nguy hiểm khi sử dụng các hàm đọc không giới hạn</a></li>
+        <li><a href="#khai-thác-buffer-overflow-để-thay-đổi-biến-local">Khai thác Buffer Overflow để thay đổi biến local</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</details>
+<details class="toc-inside mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 lg:hidden">
+  <summary
+    class="py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+    Table of Contents
+  </summary>
+  <div
+    class="py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#disclaimer">Disclaimer</a></li>
+        <li><a href="#buffer-overflow-là-gì">Buffer Overflow là gì?</a></li>
+        <li><a href="#định-vị-buffer-overflow-như-thế-nào">Định vị Buffer Overflow như thế nào?</a></li>
+        <li><a href="#memory-layout-trên-kiến-trúc-intel">Memory Layout trên kiến trúc Intel</a></li>
+        <li><a href="#việc-nguy-hiểm-khi-sử-dụng-các-hàm-đọc-không-giới-hạn">Việc nguy hiểm khi sử dụng các hàm đọc không giới hạn</a></li>
+        <li><a href="#khai-thác-buffer-overflow-để-thay-đổi-biến-local">Khai thác Buffer Overflow để thay đổi biến local</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</details>
+
+ 
+<script>
+  (function () {
+    var $toc = $('#TableOfContents');
+    if ($toc.length > 0) {
+      var $window = $(window);
+
+      function onScroll() {
+        var currentScroll = $window.scrollTop();
+        var h = $('.anchor');
+        var id = "";
+        h.each(function (i, e) {
+          e = $(e);
+          if (e.offset().top - $(window).height()/3 <= currentScroll) {
+            id = e.attr('id');
+          }
+        });
+        var active = $toc.find('a.active');      
+        if (active.length == 1 && active.eq(0).attr('href') == '#' + id) return true;
+
+        active.each(function (i, e) {
+          
+            $(e).removeClass('active');
+          
+        });
+        $toc.find('a[href="#' + id + '"]').addClass('active')
+        $toc.find('a[href="#' + id + '"]').parentsUntil('#TableOfContents').each(function (i, e) {
+          $(e).children('a').parents('ul').show();          
+        });
+      }
+
+      $window.on('scroll', onScroll);
+      $(document).ready(function () {
+        
+        onScroll();
+      });
+    }
+  })();
+</script>
+   </div>
+      </div>
+      
+
+      <div class="min-w-0 min-h-0 max-w-fit">
+        
+        
+
+
+        <div class="article-content max-w-prose mb-20">
+          <h2 class="relative group">Disclaimer 
+    <div id="disclaimer" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#disclaimer" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>Series <strong>Pwn 101</strong> này mình viết cho vui trong lúc rảnh nhằm mục đích chia sẻ lại mấy cái kiến thức mà mình học được (hoặc tự mình hiểu được nó là như thế) cũng như kinh nghiệm từ khi mới bắt đầu theo mảng Pwnable cho đến giờ. Mấy cái mớ trong này chưa chắc đã đúng hết 100% nhưng nếu thấy không vừa mắt thì cứ coi như là mình viết linh tinh rồi tắt tab này đi là được.</p>
+<h2 class="relative group">Buffer Overflow là gì? 
+    <div id="buffer-overflow-là-gì" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#buffer-overflow-l%c3%a0-g%c3%ac" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>Well, theo như con ChatGpt nó gen cho mình thì, để chép nguyên văn luôn.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">Lỗi buffer overflow là một lỗi bảo mật phổ biến trong các ứng dụng máy tính, đặc biệt là 
+</span></span><span class="line"><span class="cl">trong các chương trình được viết bằng các ngôn ngữ lập trình thấp như C và C++. Nó xảy ra 
+</span></span><span class="line"><span class="cl">khi một chương trình cố gắng ghi vào một vùng nhớ đệm (buffer) vượt quá kích thước đã cấp 
+</span></span><span class="line"><span class="cl">phát cho nó, gây ra việc ghi đè dữ liệu vào vùng nhớ khác trong bộ nhớ hoặc thậm chí là 
+</span></span><span class="line"><span class="cl">tràn ra ngoài vùng nhớ của chương trình, gây ra lỗi hoặc crash chương trình.
+</span></span></code></pre></div><p>Nói chung là, chương trình nó cho bạn cái vùng nhớ rộng 10 bytes, nhưng không nói là bạn được viết bao nhiêu byte, thế là bạn viết cmn 11 bytes hay thậm chí 69420 bytes nó vẫn lấy hết và điều này gây ra lỗi.</p>
+<p>Lỗi Buffer Overflow (tràn bộ đệm) là một trong những lỗi chương trình phổ biến mà các pwner thường khai thác, và cùng là nền tảng cho những kỹ thuật pwn phức tạp như ret2shell, ret2libc, ROP, &hellip;</p>
+<h2 class="relative group">Định vị Buffer Overflow như thế nào? 
+    <div id="định-vị-buffer-overflow-như-thế-nào" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#%c4%91%e1%bb%8bnh-v%e1%bb%8b-buffer-overflow-nh%c6%b0-th%e1%ba%bf-n%c3%a0o" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>Cái này thì vô số biến thể luôn, nhưng chung quy lại thì vẫn là chương trình nó cho phép bạn ghi vào một cái vùng nhớ nhiều dữ liệu hơn mức cái vùng nhớ đó chứa được. Để dễ tiếp cận hơn một cách cơ bản thì hãy cùng xem qua ví dụ sau.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">gets</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Một đoạn code C trông có vẻ vô hại. Chương trình này khai báo một biến <code>num</code> kiểu int có giá trị bằng 0 và một biến <code>buffer</code> là dãy 10 ký tự kiểu char. Sau đó chương trình tiến hành lấy chuỗi input từ người dùng nhập vào biến <code>buffer</code> và kết thúc chương trình mà không làm gì cả.</p>
+<p>Nhưng nếu chương trình thật sự làm gì đó thì sao? Hãy modify cái chương trình này lại một xíu nhé.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">gets</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">num</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;Wait... How?!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Tại đây ta thấy, sau khi chương trình nhận vào input của người dùng bỏ vào biến <code>buffer</code> thì sẽ kiểm tra giá trị của biến <code>num</code> xem có khác giá trị 0 hay không. Trong suốt quá trình chạy chương trình, ta không hề thực hiện bất kỳ một tác vụ nào làm thay đổi biến <code>num</code> nên xét theo lẽ thường, điều kiện if không thể đạt được.</p>
+<p>Vấn đề đặt ra ở đây là liệu có cách nào để thay đổi biến <code>num</code> khi chạy chương trình trên hay không? Câu trả lời là có.</p>
+<h2 class="relative group">Memory Layout trên kiến trúc Intel 
+    <div id="memory-layout-trên-kiến-trúc-intel" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#memory-layout-tr%c3%aan-ki%e1%ba%bfn-tr%c3%bac-intel" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>Thông thường, trong kiểu kiến trúc intel x86, các biến local của hàm khi khai báo sẽ được lưu vào trong vùng nhớ stack, và khi ta compile chương trình bằng gcc, các biến có kiểu dữ liệu kích thước cố định sẽ được ưu tiên xếp ở dưới.</p>
+<p>Thêm một điều nữa, vì intel x86 là kiểu kiến trúc Little Endian nên ngoại trừ các chuỗi ký tự, khi chương trình tiến hành đọc hay lưu dữ liệu tại địa chỉ của vùng nhớ bất kỳ thì các byte giá trị sẽ được xếp ngược lại. Tức là nếu địa chỉ chứa một biến có kiểu dữ liệu int (4 bytes) đang hiển thị là 0x04030201 thì các byte của nó có thứ tự là 01 02 03 04.</p>
+<p>Vậy nên theo như các biến ta đã khai báo như trên thì vùng nhớ sẽ cơ bản được thiết lập như sau:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">                bắt đầu của buffer
+</span></span><span class="line"><span class="cl">                      |
+</span></span><span class="line"><span class="cl">                      V
+</span></span><span class="line"><span class="cl">                | 00 00       |
+</span></span><span class="line"><span class="cl">   kết thúc     | 00 00 00 00 |
+</span></span><span class="line"><span class="cl">  của buffer -&gt; | 00 00 00 00 |
+</span></span><span class="line"><span class="cl">                | 00 00 00 00 | &lt;- kết thúc của num
+</span></span><span class="line"><span class="cl">                  ^
+</span></span><span class="line"><span class="cl">                  |
+</span></span><span class="line"><span class="cl">            bắt đầu của num
+</span></span></code></pre></div><p>Do đó ta có thể thấy, khác với địa chỉ bắt đầu của chuỗi <code>buffer</code> là nằm ở trên cùng và đọc dần xuống dưới cuối theo thứ tự từ phải sang trái, khi ta đọc biến <code>num</code> thì chương trình sẽ tự hiểu và đọc ngược các byte từ cuối về đầu, tức là từ trái sang phải. Đừng hỏi mình, cái memory nó xếp như vậy mình đâu có thiết kế mấy cái củ shit này.</p>
+<p>Ông nào học môn Kiến trúc máy tính xong có khi sẽ hiểu sơ sơ cái này còn không thì tạm thời cứ cho là như vậy trước đi.</p>
+<h2 class="relative group">Việc nguy hiểm khi sử dụng các hàm đọc không giới hạn 
+    <div id="việc-nguy-hiểm-khi-sử-dụng-các-hàm-đọc-không-giới-hạn" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#vi%e1%bb%87c-nguy-hi%e1%bb%83m-khi-s%e1%bb%ad-d%e1%bb%a5ng-c%c3%a1c-h%c3%a0m-%c4%91%e1%bb%8dc-kh%c3%b4ng-gi%e1%bb%9bi-h%e1%ba%a1n" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>Quay trở lại vấn đề chính, đầu tiên hãy nhìn vào Linux Programmer’s Manual dành cho hàm <strong>gets</strong>. Ta biết được rằng hàm <strong>gets</strong> đọc một dòng từ stdin vào bộ đệm (buffer) được trỏ tới bởi tham số con trỏ s và dừng lại cho đến khi gặp ký tự xuống dòng (‘\n’) hoặc ký tự EOF (End of File). Không những thế, ta con nhận được một dòng cảnh báo được gạch chân rất rõ ràng: “Đừng bao giờ sử dụng hàm này.”</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">GETS(3)                 Linux Programmer&#39;s Manual                GETS(3)
+</span></span><span class="line"><span class="cl">NAME
+</span></span><span class="line"><span class="cl">       gets - get a string from standard input (DEPRECATED)
+</span></span><span class="line"><span class="cl">SYNOPSIS
+</span></span><span class="line"><span class="cl">       #include &lt;stdio.h&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">       char *gets(char *s);
+</span></span><span class="line"><span class="cl">DESCRIPTION
+</span></span><span class="line"><span class="cl">       Never use this function.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">       gets() reads a line from stdin into the buffer pointed to by s
+</span></span><span class="line"><span class="cl">       until either a terminating newline or EOF, which it replaces with
+</span></span><span class="line"><span class="cl">       a null byte (&#39;\0&#39;).  No check for buffer overrun is performed
+</span></span><span class="line"><span class="cl">       (see BUGS below).
+</span></span><span class="line"><span class="cl">RETURN VALUE
+</span></span><span class="line"><span class="cl">       gets() returns s on success, and NULL on error or when end of
+</span></span><span class="line"><span class="cl">       file occurs while no characters have been read.  However, given
+</span></span><span class="line"><span class="cl">       the lack of buffer overrun checking, there can be no guarantees
+</span></span><span class="line"><span class="cl">       that the function will even return.
+</span></span><span class="line"><span class="cl">BUGS
+</span></span><span class="line"><span class="cl">       Never use gets().  Because it is impossible to tell without
+</span></span><span class="line"><span class="cl">       knowing the data in advance how many characters gets() will read,
+</span></span><span class="line"><span class="cl">       and because gets() will continue to store characters past the end
+</span></span><span class="line"><span class="cl">       of the buffer, it is extremely dangerous to use.  It has been
+</span></span><span class="line"><span class="cl">       used to break computer security.  Use fgets() instead.
+</span></span></code></pre></div><p>Bản chất của hàm <strong>gets</strong> là đọc vào chuỗi ký tự từ người dùng hoặc từ file, tuy nhiên nó lại không hề kiểm tra số lượng ký tự mà nó nhận vào. Chính do đó mà cho đến khi chưa gặp ký tự xuống dòng hoặc EOF thì nó vẫn sẽ tiếp tục đọc, và điều này dẫn đến một lỗi vô cùng phổ biến đó chính là Buffer Overflow.</p>
+<h2 class="relative group">Khai thác Buffer Overflow để thay đổi biến local 
+    <div id="khai-thác-buffer-overflow-để-thay-đổi-biến-local" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#khai-th%c3%a1c-buffer-overflow-%c4%91%e1%bb%83-thay-%c4%91%e1%bb%95i-bi%e1%ba%bfn-local" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>Giả sử ta nhập vào một chuỗi 10 ký tự ‘a’ (mã hex 0x61). Hàm <strong>gets</strong> đọc vào chuỗi này và tiến hành lưu vào trong vùng nhớ từ bắt đầu của biến <code>buffer</code> cho đến kết thúc của biến <code>buffer</code>, vừa vặn 10 bytes. Mọi thứ diễn ra như bình thường, chương trình chạy đúng như những gì chúng ta dự đoán lúc trước và không có điều gì kỳ lạ xảy ra cả.</p>
+<p>Lúc này vùng nhớ của ta sẽ như sau:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">                bắt đầu của buffer
+</span></span><span class="line"><span class="cl">                      |
+</span></span><span class="line"><span class="cl">                      V
+</span></span><span class="line"><span class="cl">                | 61 61       |
+</span></span><span class="line"><span class="cl">   kết thúc     | 61 61 61 61 |
+</span></span><span class="line"><span class="cl">  của buffer -&gt; | 61 61 61 61 |
+</span></span><span class="line"><span class="cl">                | 00 00 00 00 | &lt;- kết thúc của num
+</span></span><span class="line"><span class="cl">                  ^
+</span></span><span class="line"><span class="cl">                  |
+</span></span><span class="line"><span class="cl">            bắt đầu của num
+</span></span></code></pre></div><p>Nhưng nếu ta nhập vào chuỗi 11 ký tự ‘a’ thì sao?</p>
+<p>Hàm <strong>gets</strong> vẫn sẽ nhận vào chuỗi 11 ký tự đó, tiến hành lưu vào vùng nhớ từ bắt đầu của biến <code>buffer</code> cho đến kết thúc của biến <code>buffer</code>, nhưng độ dài vùng nhớ của biến này chỉ có 10 bytes. Câu hỏi đặt ra là: byte thứ 11 sẽ đi về đâu?</p>
+<p>Câu trả lời chính là nó sẽ tràn xuống vùng nhớ ở dưới, không đâu khác chính là vùng nhớ của biến <code>num</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">                bắt đầu của buffer
+</span></span><span class="line"><span class="cl">                      |
+</span></span><span class="line"><span class="cl">                      V
+</span></span><span class="line"><span class="cl">                | 61 61       |
+</span></span><span class="line"><span class="cl">   kết thúc     | 61 61 61 61 |
+</span></span><span class="line"><span class="cl">  của buffer -&gt; | 61 61 61 61 |
+</span></span><span class="line"><span class="cl">                | 00 00 00 61 | &lt;- kết thúc của num
+</span></span><span class="line"><span class="cl">                  ^
+</span></span><span class="line"><span class="cl">                  |
+</span></span><span class="line"><span class="cl">            bắt đầu của num
+</span></span></code></pre></div><p>Vậy khi này nếu như chương trình tiến hành đọc dữ liệu của biến <code>num</code> thì nó sẽ không còn mang giá trị 0 như ban đầu nữa mà lại là 0x61 (hay 0x00000061), tức bằng 97. Ta đã có thể thay đổi được giá trị của biến <code>num</code> và điều chỉnh được luồng thực thi của chương trình.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ ./test
+</span></span><span class="line"><span class="cl">aaaaaaaaaaa
+</span></span><span class="line"><span class="cl">Wait... How?!
+</span></span></code></pre></div><p>Nếu nhập vào nhiều ký tự hơn nữa, ta không những có thể ghi đè lên biến <code>num</code> mà còn tiếp tục ghi đè xuống được vùng nhớ ở dưới biến <code>num</code>. Nhưng vấn đề này sẽ được đè cập tới ở phần tiếp theo, trong một kỹ thuật khác bắt nguồn từ việc khai thác lỗi Buffer Overflow này.</p>
+<p>Một lưu ý nho nhỏ, là đối với các phiên bản gcc mới hơn, compiler sẽ luôn ưu tiên đặt các biến buffer ở vùng địa chỉ cao hơn các biến riêng lẻ khác (tức là nằm ở dưới trong stack) vậy nên việc ghi đè lên biến <code>num</code> như ví dụ trên sẽ không còn khả thi nữa.</p>
+<p>Trên thực tế, không chỉ mỗi hàm <strong>gets</strong> mà còn có nhiều những hàm khác có thể gây nên lỗi tràn bộ đệm. Và việc tràn bộ đệm này có thể giúp các attacker thay đổi được luồng thực thi của chương trình, và hơn nữa là chiếm được shell của hệ thống.</p>
+
+        </div>
+                
+        
+
+        
+
+          
+      </div>
+     
+    
+     <script>
+        var oid = "views_sharing\\pwn101\\buffer_overflow_1\\index.md"
+        var oid_likes = "likes_sharing\\pwn101\\buffer_overflow_1\\index.md"
+      </script>
+      
+      
+      
+      <script type="text/javascript" src="/js/page.min.5b1bad196a6075a1e11bae1dc95f24f67b610948a00525e347566c5a62338ea78f1c7224ab9a53873dcdb2a1a7d7d391b8a8ef45561297f68806c01315b0c4f6.js" integrity="sha512-WxutGWpgdaHhG64dyV8k9nthCUigBSXjR1ZsWmIzjqePHHIkq5pThz3NsqGn19ORuKjvRVYSl/aIBsATFbDE9g=="></script>
+  
+    </section>
+  <footer class="pt-8 max-w-prose print:hidden">
+
+    
+  
+
+
+    
+  </footer>
+</article>
+
+      <div id="top-scroller" class="pointer-events-none absolute top-[110vh] bottom-0 w-12 ltr:right-0 rtl:left-0">
+  <a href="#the-top"
+    class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 mb-16 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+    aria-label="Scroll to top" title="Scroll to top">
+    &uarr;
+  </a>
+</div>
+    </main><footer id="site-footer" class="py-10 print:hidden">
+  
+  
+    
+    <nav class="flex flex-row pb-4 text-base font-medium text-neutral-500 dark:text-neutral-400">
+      <ul class="flex flex-col list-none sm:flex-row">
+        
+        <li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
+          <a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center" href=""
+            title="">
+            
+            
+          </a>
+        </li>
+        
+      </ul>
+    </nav>
+    
+  
+  <div class="flex items-center justify-between">
+
+    
+    
+    <p class="text-sm text-neutral-500 dark:text-neutral-400">
+      &copy;
+      2024
+      Round Table of Skill Issue
+    </p>
+    
+
+    
+    
+    <p class="text-xs text-neutral-500 dark:text-neutral-400">
+      
+      
+      Powered by <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+        href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+        href="https://blowfish.page/" target="_blank" rel="noopener noreferrer">Blowfish</a>
+    </p>
+    
+
+  </div>
+  <script>
+    
+    mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
+      margin: 24,
+      background: 'rgba(0,0,0,0.5)',
+      scrollOffset: 0,
+    })
+    
+  </script>
+  
+  
+  <script type="text/javascript" src="/js/process.min.62060bb247f4de2b6dde45903668fefb68d792f365587605177b1227c0cf43588701edaca0cb40e2c8e2789bd5ce67c1d2a215b9fb258c3496a7cd25e7cb5fdf.js" integrity="sha512-YgYLskf03itt3kWQNmj&#43;&#43;2jXkvNlWHYFF3sSJ8DPQ1iHAe2soMtA4sjieJvVzmfB0qIVufsljDSWp80l58tf3w=="></script>
+  
+  
+</footer><div
+  id="search-wrapper"
+  class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh]"
+  data-url="https://roundtableofskillissue.github.io/"
+  style="z-index:500"
+>
+  <div
+    id="search-modal"
+    class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800"
+  >
+    <header class="relative z-10 flex items-center justify-between flex-none px-2">
+      <form class="flex items-center flex-auto min-w-0">
+        <div class="flex items-center justify-center w-8 h-8 text-neutral-400">
+          
+
+  <span class="relative block icon">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+
+  </span>
+
+
+        </div>
+        <input
+          type="search"
+          id="search-query"
+          class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent"
+          placeholder="Search"
+          tabindex="0"
+        />
+      </form>
+      <button
+        id="close-search-button"
+        class="flex items-center justify-center w-8 h-8 text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+        title="Close (Esc)"
+      >
+        
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+
+  </span>
+
+
+      </button>
+    </header>
+    <section class="flex-auto px-2 overflow-auto">
+      <ul id="search-results">
+        
+      </ul>
+    </section>
+  </div>
+</div>
+
+  </div>
+</body>
+
+</html>
