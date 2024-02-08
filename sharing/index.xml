@@ -7,14 +7,24 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© 2024 Round Table of Skill Issue</copyright>
-    <lastBuildDate>Sun, 30 Apr 2023 00:00:00 +0700</lastBuildDate><atom:link href="https://roundtableofskillissue.github.io/sharing/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 08 Feb 2024 15:20:00 +0700</lastBuildDate><atom:link href="https://roundtableofskillissue.github.io/sharing/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Pwn 101: Buffer Overflow Part 1</title>
       <link>https://roundtableofskillissue.github.io/sharing/pwn101/buffer_overflow_1/</link>
-      <pubDate>Sun, 30 Apr 2023 00:00:00 +0700</pubDate>
+      <pubDate>Thu, 08 Feb 2024 15:20:00 +0700</pubDate>
       
       <guid>https://roundtableofskillissue.github.io/sharing/pwn101/buffer_overflow_1/</guid>
       <description>Buffer Overflow là gì? Điều gì gây nên lỗi tràn bộ đệm? Làm sao để khai thác?</description>
+      
+    </item>
+    
+    <item>
+      <title>Pwn 101: Xây dựng nền tảng</title>
+      <link>https://roundtableofskillissue.github.io/sharing/pwn101/fundamental/</link>
+      <pubDate>Thu, 08 Feb 2024 15:00:00 +0700</pubDate>
+      
+      <guid>https://roundtableofskillissue.github.io/sharing/pwn101/fundamental/</guid>
+      <description>Những điều cần biết khi học chơi pwnable</description>
       
     </item>
     

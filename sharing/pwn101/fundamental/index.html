@@ -8,14 +8,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   
-  <title>Pwn 101: Buffer Overflow Part 1 &middot; RToSI</title>
-  <meta name="title" content="Pwn 101: Buffer Overflow Part 1 &middot; RToSI" />
+  <title>Pwn 101: Xây dựng nền tảng &middot; RToSI</title>
+  <meta name="title" content="Pwn 101: Xây dựng nền tảng &middot; RToSI" />
   
-  <meta name="description" content="Buffer Overflow là gì? Điều gì gây nên lỗi tràn bộ đệm? Làm sao để khai thác?" />
+  <meta name="description" content="Những điều cần biết khi học chơi pwnable" />
   <meta name="keywords" content="pwn, " />
   
   
-  <link rel="canonical" href="https://roundtableofskillissue.github.io/sharing/pwn101/buffer_overflow_1/" />
+  <link rel="canonical" href="https://roundtableofskillissue.github.io/sharing/pwn101/fundamental/" />
   
   
   
@@ -65,18 +65,18 @@
   
   
   
-  <meta property="og:title" content="Pwn 101: Buffer Overflow Part 1" />
-<meta property="og:description" content="Buffer Overflow là gì? Điều gì gây nên lỗi tràn bộ đệm? Làm sao để khai thác?" />
+  <meta property="og:title" content="Pwn 101: Xây dựng nền tảng" />
+<meta property="og:description" content="Những điều cần biết khi học chơi pwnable" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://roundtableofskillissue.github.io/sharing/pwn101/buffer_overflow_1/" /><meta property="article:section" content="sharing" />
-<meta property="article:published_time" content="2024-02-08T15:20:00+07:00" />
-<meta property="article:modified_time" content="2024-02-08T15:20:00+07:00" />
-<meta property="og:see_also" content="https://roundtableofskillissue.github.io/sharing/pwn101/fundamental/" />
+<meta property="og:url" content="https://roundtableofskillissue.github.io/sharing/pwn101/fundamental/" /><meta property="article:section" content="sharing" />
+<meta property="article:published_time" content="2024-02-08T15:00:00+07:00" />
+<meta property="article:modified_time" content="2024-02-08T15:00:00+07:00" />
+<meta property="og:see_also" content="https://roundtableofskillissue.github.io/sharing/pwn101/buffer_overflow_1/" />
 
 
 
-  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Pwn 101: Buffer Overflow Part 1"/>
-<meta name="twitter:description" content="Buffer Overflow là gì? Điều gì gây nên lỗi tràn bộ đệm? Làm sao để khai thác?"/>
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Pwn 101: Xây dựng nền tảng"/>
+<meta name="twitter:description" content="Những điều cần biết khi học chơi pwnable"/>
 
   
   <script type="application/ld+json">
@@ -84,26 +84,26 @@
     "@context": "https://schema.org",
     "@type": "Article",
     "articleSection": "Sharings",
-    "name": "Pwn 101: Buffer Overflow Part 1",
-    "headline": "Pwn 101: Buffer Overflow Part 1",
+    "name": "Pwn 101: Xây dựng nền tảng",
+    "headline": "Pwn 101: Xây dựng nền tảng",
     
-    "abstract": "Buffer Overflow là gì? Điều gì gây nên lỗi tràn bộ đệm? Làm sao để khai thác?",
+    "abstract": "Những điều cần biết khi học chơi pwnable",
     "inLanguage": "en",
-    "url" : "https:\/\/roundtableofskillissue.github.io\/sharing\/pwn101\/buffer_overflow_1\/",
+    "url" : "https:\/\/roundtableofskillissue.github.io\/sharing\/pwn101\/fundamental\/",
     "author" : {
       "@type": "Person",
       "name": "Round Table of Skill Issue"
     },
     "copyrightYear": "2024",
-    "dateCreated": "2024-02-08T15:20:00\u002b07:00",
-    "datePublished": "2024-02-08T15:20:00\u002b07:00",
+    "dateCreated": "2024-02-08T15:00:00\u002b07:00",
+    "datePublished": "2024-02-08T15:00:00\u002b07:00",
     
-    "dateModified": "2024-02-08T15:20:00\u002b07:00",
+    "dateModified": "2024-02-08T15:00:00\u002b07:00",
     
     "keywords": ["pwn"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "1624"
+    "wordCount": "1836"
   }]
   </script>
 
@@ -475,7 +475,7 @@
   <header id="single_header" class="mt-5 max-w-prose">
     
     <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
-      Pwn 101: Buffer Overflow Part 1
+      Pwn 101: Xây dựng nền tảng
     </h1>
     <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
       
@@ -520,7 +520,7 @@
 <div class="flex flex-row flex-wrap items-center">
   
   
-  <time datetime="2024-02-08 15:20:00 &#43;0700 &#43;07">8 February 2024</time><span class="px-2 text-primary-500">&middot;</span><span>1624 words</span><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">8 mins</span>
+  <time datetime="2024-02-08 15:00:00 &#43;0700 &#43;07">8 February 2024</time><span class="px-2 text-primary-500">&middot;</span><span>1836 words</span><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">9 mins</span>
   
 
   
@@ -682,11 +682,22 @@
     class="min-w-[220px] py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#buffer-overflow-là-gì">Buffer Overflow là gì?</a></li>
-    <li><a href="#định-vị-buffer-overflow-như-thế-nào">Định vị Buffer Overflow như thế nào?</a></li>
-    <li><a href="#memory-layout-trên-kiến-trúc-intel">Memory Layout trên kiến trúc Intel</a></li>
-    <li><a href="#việc-nguy-hiểm-khi-sử-dụng-các-hàm-đọc-không-giới-hạn">Việc nguy hiểm khi sử dụng các hàm đọc không giới hạn</a></li>
-    <li><a href="#khai-thác-buffer-overflow-để-thay-đổi-biến-local">Khai thác Buffer Overflow để thay đổi biến local</a></li>
+    <li><a href="#disclaimer">Disclaimer</a></li>
+    <li><a href="#kiến-thức-và-kỹ-thuật">Kiến thức và kỹ thuật</a>
+      <ul>
+        <li><a href="#kỹ-năng-lập-trình">Kỹ năng lập trình</a></li>
+        <li><a href="#kiến-trúc-máy-tính-và-mã-máy">Kiến trúc máy tính và mã máy</a></li>
+        <li><a href="#think-outside-of-the-box">Think outside of the box</a></li>
+      </ul>
+    </li>
+    <li><a href="#tools">Tools</a>
+      <ul>
+        <li><a href="#decompilerdisassembler">Decompiler/Disassembler</a></li>
+        <li><a href="#debugger-with-plugins">Debugger (with plugins)</a></li>
+        <li><a href="#miscellaneous">Miscellaneous</a></li>
+      </ul>
+    </li>
+    <li><a href="#last-words">Last words</a></li>
   </ul>
 </nav>
   </div>
@@ -700,11 +711,22 @@
     class="py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#buffer-overflow-là-gì">Buffer Overflow là gì?</a></li>
-    <li><a href="#định-vị-buffer-overflow-như-thế-nào">Định vị Buffer Overflow như thế nào?</a></li>
-    <li><a href="#memory-layout-trên-kiến-trúc-intel">Memory Layout trên kiến trúc Intel</a></li>
-    <li><a href="#việc-nguy-hiểm-khi-sử-dụng-các-hàm-đọc-không-giới-hạn">Việc nguy hiểm khi sử dụng các hàm đọc không giới hạn</a></li>
-    <li><a href="#khai-thác-buffer-overflow-để-thay-đổi-biến-local">Khai thác Buffer Overflow để thay đổi biến local</a></li>
+    <li><a href="#disclaimer">Disclaimer</a></li>
+    <li><a href="#kiến-thức-và-kỹ-thuật">Kiến thức và kỹ thuật</a>
+      <ul>
+        <li><a href="#kỹ-năng-lập-trình">Kỹ năng lập trình</a></li>
+        <li><a href="#kiến-trúc-máy-tính-và-mã-máy">Kiến trúc máy tính và mã máy</a></li>
+        <li><a href="#think-outside-of-the-box">Think outside of the box</a></li>
+      </ul>
+    </li>
+    <li><a href="#tools">Tools</a>
+      <ul>
+        <li><a href="#decompilerdisassembler">Decompiler/Disassembler</a></li>
+        <li><a href="#debugger-with-plugins">Debugger (with plugins)</a></li>
+        <li><a href="#miscellaneous">Miscellaneous</a></li>
+      </ul>
+    </li>
+    <li><a href="#last-words">Last words</a></li>
   </ul>
 </nav>
   </div>
@@ -767,16 +789,16 @@
     
     <div
         class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-        <a href="https://roundtableofskillissue.github.io/sharing/pwn101/fundamental/">
-            Part 1: Pwn 101: Xây dựng nền tảng
-        </a>
+        Part 1: This Article
     </div>
     
     
     
     <div
         class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-        Part 2: This Article
+        <a href="https://roundtableofskillissue.github.io/sharing/pwn101/buffer_overflow_1/">
+            Part 2: Pwn 101: Buffer Overflow Part 1
+        </a>
     </div>
     
     
@@ -786,158 +808,205 @@
 
 
         <div class="article-content max-w-prose mb-20">
-          <h1 class="relative group">Buffer Overflow là gì? 
-    <div id="buffer-overflow-là-gì" class="anchor"></div>
+          <h1 class="relative group">Disclaimer 
+    <div id="disclaimer" class="anchor"></div>
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
         <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
-            style="text-decoration-line: none !important;" href="#buffer-overflow-l%c3%a0-g%c3%ac" aria-label="Anchor">#</a>
+            style="text-decoration-line: none !important;" href="#disclaimer" aria-label="Anchor">#</a>
     </span>        
     
 </h1>
-<p>Well, theo như con ChatGpt nó gen cho mình thì, để chép nguyên văn luôn:</p>
-<p>&ldquo;Lỗi buffer overflow là một lỗi bảo mật phổ biến trong các ứng dụng máy tính, đặc biệt là trong các chương trình được viết bằng các ngôn ngữ lập trình thấp như C và C++. Nó xảy ra  khi một chương trình cố gắng ghi vào một vùng nhớ đệm (buffer) vượt quá kích thước đã cấp phát cho nó, gây ra việc ghi đè dữ liệu vào vùng nhớ khác trong bộ nhớ hoặc thậm chí là tràn ra ngoài vùng nhớ của chương trình, gây ra lỗi hoặc crash chương trình.&rdquo;</p>
-<p>Nói chung là, chương trình nó cho bạn cái vùng nhớ rộng 10 bytes, nhưng không nói là bạn được viết bao nhiêu byte, thế là bạn viết cmn 11 bytes hay thậm chí 69420 bytes nó vẫn lấy hết và điều này gây ra lỗi.</p>
-<p>Lỗi Buffer Overflow (tràn bộ đệm) là một trong những lỗi chương trình phổ biến mà các pwner thường khai thác, và cùng là nền tảng cho những kỹ thuật pwn phức tạp như ret2shell, ret2libc, ROP, &hellip;</p>
-<h1 class="relative group">Định vị Buffer Overflow như thế nào? 
-    <div id="định-vị-buffer-overflow-như-thế-nào" class="anchor"></div>
+<p>Series <strong>Pwn 101</strong> này mình viết cho vui trong lúc rảnh nhằm mục đích chia sẻ lại mấy cái kiến thức mà mình học được (hoặc tự mình hiểu được nó là như thế) cũng như kinh nghiệm từ khi mới bắt đầu theo mảng <code>Pwnable</code> cho đến giờ. Mấy cái mớ trong này chưa chắc đã đúng hết 100% nhưng nếu thấy không vừa mắt thì cứ coi như là mình viết linh tinh rồi tắt tab này đi là được.</p>
+<p>Đầu tiên phải nói là cái mảng này nó khổ, khổ lên khổ xuống, khổ điên khổ khùng. Vừa khổ vừa khó tiếp cận nếu bạn là người mới tập tành chơi CTF. Nên là trước khi đi sâu hơn vào vấn đề thì mình có 1 lời khuyên dành cho các bạn là&hellip; bỏ đi mà làm người, tập chơi <code>crypto</code> hay <code>web</code> trước cho dễ làm quen trước ấy rồi quay lại học chơi <code>pwn</code> như mảng phụ chắc cũng chưa muộn đâu.</p>
+<p>Còn nếu đã có quyết tâm theo cái mảng này đến cùng thì, welcome to <strong>Pwn 101</strong>.</p>
+<h1 class="relative group">Kiến thức và kỹ thuật 
+    <div id="kiến-thức-và-kỹ-thuật" class="anchor"></div>
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
         <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
-            style="text-decoration-line: none !important;" href="#%c4%91%e1%bb%8bnh-v%e1%bb%8b-buffer-overflow-nh%c6%b0-th%e1%ba%bf-n%c3%a0o" aria-label="Anchor">#</a>
+            style="text-decoration-line: none !important;" href="#ki%e1%ba%bfn-th%e1%bb%a9c-v%c3%a0-k%e1%bb%b9-thu%e1%ba%adt" aria-label="Anchor">#</a>
     </span>        
     
 </h1>
-<p>Cái này thì vô số biến thể luôn, nhưng chung quy lại thì vẫn là chương trình nó cho phép bạn ghi vào một cái vùng nhớ nhiều dữ liệu hơn mức cái vùng nhớ đó chứa được. Để dễ tiếp cận hơn một cách cơ bản thì hãy cùng xem qua ví dụ sau.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">gets</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>Một đoạn code C trông có vẻ vô hại. Chương trình này khai báo một biến <code>num</code> kiểu int có giá trị bằng 0 và một biến <code>buffer</code> là dãy 10 ký tự kiểu char. Sau đó chương trình tiến hành lấy chuỗi input từ người dùng nhập vào biến <code>buffer</code> và kết thúc chương trình mà không làm gì cả.</p>
-<p>Nhưng nếu chương trình thật sự làm gì đó thì sao? Hãy modify cái chương trình này lại một xíu nhé.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">gets</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">num</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;Wait... How?!&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>Tại đây ta thấy, sau khi chương trình nhận vào input của người dùng bỏ vào biến <code>buffer</code> thì sẽ kiểm tra giá trị của biến <code>num</code> xem có khác giá trị 0 hay không. Trong suốt quá trình chạy chương trình, ta không hề thực hiện bất kỳ một tác vụ nào làm thay đổi biến <code>num</code> nên xét theo lẽ thường, điều kiện if không thể đạt được.</p>
-<p>Vấn đề đặt ra ở đây là liệu có cách nào để thay đổi biến <code>num</code> khi chạy chương trình trên hay không? Câu trả lời là có.</p>
-<h1 class="relative group">Memory Layout trên kiến trúc Intel 
-    <div id="memory-layout-trên-kiến-trúc-intel" class="anchor"></div>
+<p>Để chơi tốt và không mau nản ở cái bộ môn củ chuối này thì dưới đây là một số thứ có thể xem như là hành trang cần thiết và gần như là yêu cầu bắt buộc nếu bạn không muốn tốn thời gian quá lâu cho một bài <code>pwn</code> cực kỳ cơ bản.</p>
+<h2 class="relative group">Kỹ năng lập trình 
+    <div id="kỹ-năng-lập-trình" class="anchor"></div>
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
         <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
-            style="text-decoration-line: none !important;" href="#memory-layout-tr%c3%aan-ki%e1%ba%bfn-tr%c3%bac-intel" aria-label="Anchor">#</a>
+            style="text-decoration-line: none !important;" href="#k%e1%bb%b9-n%c4%83ng-l%e1%ba%adp-tr%c3%acnh" aria-label="Anchor">#</a>
     </span>        
     
-</h1>
-<p>Thông thường, trong kiểu kiến trúc intel x86, các biến local của hàm khi khai báo sẽ được lưu vào trong vùng nhớ stack, và khi ta compile chương trình bằng gcc, các biến có kiểu dữ liệu kích thước cố định sẽ được ưu tiên xếp ở dưới.</p>
-<p>Thêm một điều nữa, vì intel x86 là kiểu kiến trúc Little Endian nên ngoại trừ các chuỗi ký tự, khi chương trình tiến hành đọc hay lưu dữ liệu tại địa chỉ của vùng nhớ bất kỳ thì các byte giá trị sẽ được xếp ngược lại. Tức là nếu địa chỉ chứa một biến có kiểu dữ liệu int (4 bytes) đang hiển thị là 0x04030201 thì các byte của nó có thứ tự là 01 02 03 04.</p>
-<p>Vậy nên theo như các biến ta đã khai báo như trên thì vùng nhớ sẽ cơ bản được thiết lập như sau:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">                bắt đầu của buffer
-</span></span><span class="line"><span class="cl">                      |
-</span></span><span class="line"><span class="cl">                      V
-</span></span><span class="line"><span class="cl">                | 00 00       |
-</span></span><span class="line"><span class="cl">   kết thúc     | 00 00 00 00 |
-</span></span><span class="line"><span class="cl">  của buffer -&gt; | 00 00 00 00 |
-</span></span><span class="line"><span class="cl">                | 00 00 00 00 | &lt;- kết thúc của num
-</span></span><span class="line"><span class="cl">                  ^
-</span></span><span class="line"><span class="cl">                  |
-</span></span><span class="line"><span class="cl">            bắt đầu của num
-</span></span></code></pre></div><p>Do đó ta có thể thấy, khác với địa chỉ bắt đầu của chuỗi <code>buffer</code> là nằm ở trên cùng và đọc dần xuống dưới cuối theo thứ tự từ phải sang trái, khi ta đọc biến <code>num</code> thì chương trình sẽ tự hiểu và đọc ngược các byte từ cuối về đầu, tức là từ trái sang phải. Đừng hỏi mình, cái memory nó xếp như vậy mình đâu có thiết kế mấy cái củ shit này.</p>
-<p>Ông nào học môn Kiến trúc máy tính xong có khi sẽ hiểu sơ sơ cái này còn không thì tạm thời cứ cho là như vậy trước đi.</p>
-<h1 class="relative group">Việc nguy hiểm khi sử dụng các hàm đọc không giới hạn 
-    <div id="việc-nguy-hiểm-khi-sử-dụng-các-hàm-đọc-không-giới-hạn" class="anchor"></div>
+</h2>
+<p>Cái này thì khỏi phải nói rồi ha?</p>
+<p>Làm thế quái nào mà bạn có thể biết được chương trình này bị lỗi gì, có thể khai thác ra sao mà không hiểu được thứ cơ bản nhất là cái mớ code này đang làm gì cơ chứ.</p>
+<p>Ừ thì công nhận là đối với mấy bài ở mức cơ bản thì chỉ cần đọc hiểu cái chương trình nó làm gì thôi cũng đủ để solve được rồi. Nhưng càng lên cao thì càng khó detect được lỗi chương trình vì đôi khi nó thật sự rất tinh vi. Nên là nếu không hiểu ý đồ của người tạo ra chương trình thì rất khó để tìm ra lỗi.</p>
+<p>Ngoài ra thì mình cũng phải biết cách viết script <em>Python</em> nữa. Thử tưởng tượng bạn vừa tìm ra được lỗi chương trình nhưng mà trước đó phải giải 7749 cái bài toán ngẫu nhiên khác nhau thì mới tới được chỗ này đi, xong bạn cần thử nhập một số từ 1 đến 100 xem cái nào sẽ gây ra lỗi. Vậy thì mỗi khi muốn nhập một số để thử thì bạn lại phải giải 7749 cái bài toán đó lại lần nữa.</p>
+<p>Đó là lý do mà chúng ta cần phải biết viết script để tự động hóa việc khai thác lỗi chương trình. Còn tại sao lại là <em>Python</em> thì chắc chắn là do thư viện <code>pwntools</code> cực kỳ tiện lợi của nó rồi.</p>
+<p>Đối với phần lớn các thử thách <code>pwn</code> thì mình sẽ đọc pseudocode <em>C</em> được gen ra từ các decompiler là chủ yếu, hoặc lâu lâu thì gặp mấy bài dính tới <em>C++</em>, <em>Rust</em>, <em>Go</em>,&hellip; nhưng chủ yếu vẫn là đọc code <em>C</em> và debug cùng con quái vật mang tên <em>Assembly</em>.</p>
+<h2 class="relative group">Kiến trúc máy tính và mã máy 
+    <div id="kiến-trúc-máy-tính-và-mã-máy" class="anchor"></div>
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
         <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
-            style="text-decoration-line: none !important;" href="#vi%e1%bb%87c-nguy-hi%e1%bb%83m-khi-s%e1%bb%ad-d%e1%bb%a5ng-c%c3%a1c-h%c3%a0m-%c4%91%e1%bb%8dc-kh%c3%b4ng-gi%e1%bb%9bi-h%e1%ba%a1n" aria-label="Anchor">#</a>
+            style="text-decoration-line: none !important;" href="#ki%e1%ba%bfn-tr%c3%bac-m%c3%a1y-t%c3%adnh-v%c3%a0-m%c3%a3-m%c3%a1y" aria-label="Anchor">#</a>
     </span>        
     
-</h1>
-<p>Quay trở lại vấn đề chính, đầu tiên hãy nhìn vào Linux Programmer’s Manual dành cho hàm <strong>gets</strong>. Ta biết được rằng hàm <strong>gets</strong> đọc một dòng từ stdin vào bộ đệm (buffer) được trỏ tới bởi tham số con trỏ s và dừng lại cho đến khi gặp ký tự xuống dòng (‘\n’) hoặc ký tự EOF (End of File). Không những thế, ta con nhận được một dòng cảnh báo được gạch chân rất rõ ràng: “Đừng bao giờ sử dụng hàm này.”</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">GETS(3)                 Linux Programmer&#39;s Manual                GETS(3)
-</span></span><span class="line"><span class="cl">NAME
-</span></span><span class="line"><span class="cl">       gets - get a string from standard input (DEPRECATED)
-</span></span><span class="line"><span class="cl">SYNOPSIS
-</span></span><span class="line"><span class="cl">       #include &lt;stdio.h&gt;
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">       char *gets(char *s);
-</span></span><span class="line"><span class="cl">DESCRIPTION
-</span></span><span class="line"><span class="cl">       Never use this function.
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">       gets() reads a line from stdin into the buffer pointed to by s
-</span></span><span class="line"><span class="cl">       until either a terminating newline or EOF, which it replaces with
-</span></span><span class="line"><span class="cl">       a null byte (&#39;\0&#39;).  No check for buffer overrun is performed
-</span></span><span class="line"><span class="cl">       (see BUGS below).
-</span></span><span class="line"><span class="cl">RETURN VALUE
-</span></span><span class="line"><span class="cl">       gets() returns s on success, and NULL on error or when end of
-</span></span><span class="line"><span class="cl">       file occurs while no characters have been read.  However, given
-</span></span><span class="line"><span class="cl">       the lack of buffer overrun checking, there can be no guarantees
-</span></span><span class="line"><span class="cl">       that the function will even return.
-</span></span><span class="line"><span class="cl">BUGS
-</span></span><span class="line"><span class="cl">       Never use gets().  Because it is impossible to tell without
-</span></span><span class="line"><span class="cl">       knowing the data in advance how many characters gets() will read,
-</span></span><span class="line"><span class="cl">       and because gets() will continue to store characters past the end
-</span></span><span class="line"><span class="cl">       of the buffer, it is extremely dangerous to use.  It has been
-</span></span><span class="line"><span class="cl">       used to break computer security.  Use fgets() instead.
-</span></span></code></pre></div><p>Bản chất của hàm <strong>gets</strong> là đọc vào chuỗi ký tự từ người dùng hoặc từ file, tuy nhiên nó lại không hề kiểm tra số lượng ký tự mà nó nhận vào. Chính do đó mà cho đến khi chưa gặp ký tự xuống dòng hoặc EOF thì nó vẫn sẽ tiếp tục đọc, và điều này dẫn đến một lỗi vô cùng phổ biến đó chính là Buffer Overflow.</p>
-<h1 class="relative group">Khai thác Buffer Overflow để thay đổi biến local 
-    <div id="khai-thác-buffer-overflow-để-thay-đổi-biến-local" class="anchor"></div>
+</h2>
+<p>Vì người chơi <code>pwn</code> phải làm việc với những chương trình được viết bằng các ngôn ngữ bậc thấp nên việc hiểu được dưới tầng sâu của máy tính luồng dữ liệu được mang đi đâu và xử lý như thế nào là vô cùng quan trọng.</p>
+<p>Có thể kể đến như việc phân biệt <code>little endian</code> và <code>big endian</code> tổ chức dữ liệu khác nhau như thế nào, hay theo như <em>calling convention</em> thì các tham số truyền vào sẽ được tổ chức trong các thanh ghi ra sao khi gọi hàm cũng như thực hiện các <em>system call</em>.</p>
+<p>Phần lớn thì các file chương trình <code>pwn</code> sẽ chạy trên kiến trúc <code>AMD x86</code> hoặc <code>x64</code>, đương nhiên thì thi thoảng cũng sẽ gặp các chương trình chạy trên kiến trúc <code>ARM</code> hoặc <code>RISC-V</code>. Nên các bạn có thể tập trung vào <code>AMD</code> trước còn các kiểu kiến trúc còn lại có thể nghiên cứu tại chỗ nếu gặp phải. Nếu đã có nền tảng vững về luồng thực thi trên <code>AMD</code> rồi thì mình tin là việc nắm bắt và hiểu được các kiểu kiến trúc khác ở mức vận dụng thấp là điều không hề khó.</p>
+<h2 class="relative group">Think outside of the box 
+    <div id="think-outside-of-the-box" class="anchor"></div>
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
         <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
-            style="text-decoration-line: none !important;" href="#khai-th%c3%a1c-buffer-overflow-%c4%91%e1%bb%83-thay-%c4%91%e1%bb%95i-bi%e1%ba%bfn-local" aria-label="Anchor">#</a>
+            style="text-decoration-line: none !important;" href="#think-outside-of-the-box" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>Thứ quan trọng nhất và không thể thiếu khi chơi <code>pwn</code> chính là tư duy.</p>
+<p>Đâu phải ai cũng nhìn vào cái chương trình nhập dữ liệu cho index bất kỳ của một array và tự hỏi rằng: &ldquo;Sẽ như thế nào nếu mình chọn index âm?&rdquo; Và trong trường hợp bị filter đi dấu trừ thì cũng sẽ thử tìm cách nhập số đủ lớn để khiến nó bị <em>tràn</em> sang số âm. Nhưng mà làm thế quái nào biết nó sẽ bị tràn số?</p>
+<p>Vậy nên đương nhiên là mỗi tư duy không thì chắc chắn là chưa đủ. Để tận dụng được tư duy đó vào thực tiễn thì kiến thức nền cũng là một phần không thể thiếu, hai thứ này phải đi với nhau thì mới tạo ra được một cá nhân xuất sắc. Mình chắc chắn là điều này là cực kỳ cần thiết ở tất cả các mảng CTF chứ không riêng gì <code>pwn</code>.</p>
+<h1 class="relative group">Tools 
+    <div id="tools" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#tools" aria-label="Anchor">#</a>
     </span>        
     
 </h1>
-<p>Giả sử ta nhập vào một chuỗi 10 ký tự ‘a’ (mã hex 0x61). Hàm <strong>gets</strong> đọc vào chuỗi này và tiến hành lưu vào trong vùng nhớ từ bắt đầu của biến <code>buffer</code> cho đến kết thúc của biến <code>buffer</code>, vừa vặn 10 bytes. Mọi thứ diễn ra như bình thường, chương trình chạy đúng như những gì chúng ta dự đoán lúc trước và không có điều gì kỳ lạ xảy ra cả.</p>
-<p>Lúc này vùng nhớ của ta sẽ như sau:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">                bắt đầu của buffer
-</span></span><span class="line"><span class="cl">                      |
-</span></span><span class="line"><span class="cl">                      V
-</span></span><span class="line"><span class="cl">                | 61 61       |
-</span></span><span class="line"><span class="cl">   kết thúc     | 61 61 61 61 |
-</span></span><span class="line"><span class="cl">  của buffer -&gt; | 61 61 61 61 |
-</span></span><span class="line"><span class="cl">                | 00 00 00 00 | &lt;- kết thúc của num
-</span></span><span class="line"><span class="cl">                  ^
-</span></span><span class="line"><span class="cl">                  |
-</span></span><span class="line"><span class="cl">            bắt đầu của num
-</span></span></code></pre></div><p>Nhưng nếu ta nhập vào chuỗi 11 ký tự ‘a’ thì sao?</p>
-<p>Hàm <strong>gets</strong> vẫn sẽ nhận vào chuỗi 11 ký tự đó, tiến hành lưu vào vùng nhớ từ bắt đầu của biến <code>buffer</code> cho đến kết thúc của biến <code>buffer</code>, nhưng độ dài vùng nhớ của biến này chỉ có 10 bytes. Câu hỏi đặt ra là: byte thứ 11 sẽ đi về đâu?</p>
-<p>Câu trả lời chính là nó sẽ tràn xuống vùng nhớ ở dưới, không đâu khác chính là vùng nhớ của biến <code>num</code>.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">                bắt đầu của buffer
-</span></span><span class="line"><span class="cl">                      |
-</span></span><span class="line"><span class="cl">                      V
-</span></span><span class="line"><span class="cl">                | 61 61       |
-</span></span><span class="line"><span class="cl">   kết thúc     | 61 61 61 61 |
-</span></span><span class="line"><span class="cl">  của buffer -&gt; | 61 61 61 61 |
-</span></span><span class="line"><span class="cl">                | 00 00 00 61 | &lt;- kết thúc của num
-</span></span><span class="line"><span class="cl">                  ^
-</span></span><span class="line"><span class="cl">                  |
-</span></span><span class="line"><span class="cl">            bắt đầu của num
-</span></span></code></pre></div><p>Vậy khi này nếu như chương trình tiến hành đọc dữ liệu của biến <code>num</code> thì nó sẽ không còn mang giá trị 0 như ban đầu nữa mà lại là 0x61 (hay 0x00000061), tức bằng 97. Ta đã có thể thay đổi được giá trị của biến <code>num</code> và điều chỉnh được luồng thực thi của chương trình.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ ./test
-</span></span><span class="line"><span class="cl">aaaaaaaaaaa
-</span></span><span class="line"><span class="cl">Wait... How?!
-</span></span></code></pre></div><p>Nếu nhập vào nhiều ký tự hơn nữa, ta không những có thể ghi đè lên biến <code>num</code> mà còn tiếp tục ghi đè xuống được vùng nhớ ở dưới biến <code>num</code>. Nhưng vấn đề này sẽ được đè cập tới ở phần tiếp theo, trong một kỹ thuật khác bắt nguồn từ việc khai thác lỗi Buffer Overflow này.</p>
-<p>Một lưu ý nho nhỏ, là đối với các phiên bản gcc mới hơn, compiler sẽ luôn ưu tiên đặt các biến buffer ở vùng địa chỉ cao hơn các biến riêng lẻ khác (tức là nằm ở dưới trong stack) vậy nên việc ghi đè lên biến <code>num</code> như ví dụ trên sẽ không còn khả thi nữa.</p>
-<p>Trên thực tế, không chỉ mỗi hàm <strong>gets</strong> mà còn có nhiều những hàm khác có thể gây nên lỗi tràn bộ đệm. Và việc tràn bộ đệm này có thể giúp các attacker thay đổi được luồng thực thi của chương trình, và hơn nữa là chiếm được shell của hệ thống.</p>
+<p>Trong quá trình chơi <code>pwn</code> thì tool (công cụ) là một người bạn đồng hành cực kỳ quan trọng không những để khiến việc đọc hiểu, debug chương trình trở nên dễ dàng hơn mà còn nhờ đó tăng tốc độ solve các thử thách. Vậy thì đâu là những tool cần có đối với một <code>pwner</code>? Dưới đây là một số tool mà mình thấy rằng hầu như không thể thiếu mỗi khi chơi <code>pwn</code>.</p>
+<h2 class="relative group">Decompiler/Disassembler 
+    <div id="decompilerdisassembler" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#decompilerdisassembler" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>Đây là thứ giúp dịch ngược các file ELF, thứ mà chứa toàn các đoạn code <em>assembly</em> (hợp ngữ) về <em>pseudocode</em> (mã giả) cho dễ đọc. Các đoạn code này thường vẫn sẽ là <em>C</em> hoặc <em>C++</em>. Một số decompiler/disassembler nổi tiếng hiện nay có thể kể đến như:</p>
+<p><a href="https://hex-rays.com"   target="_blank">
+    IDA</a>: Có thể xem như là loại tốt nhất hiện nay. Nếu như bạn có điều kiện thì đầu tư một bản IDA Pro chắc chắn không hề lãng phí. Tuy nhiên thì bản IDA Free vẫn hỗ trợ rất tốt đối với phần lớn các thử thách <code>pwn</code> hiện nay. Hoặc đơn giản hơn là tìm crack trên mạng mà down về thôi.</p>
+<p><a href="https://ghidra-sre.org"   target="_blank">
+    Ghidra</a>: Tool này thì free nhưng mà mình chưa xài bao giờ. Mình có xem qua được một số pseudocode mà nó tạo ra thông qua các writeup đọc trên mạng hoặc từ người quen sử dụng và phải nói thật là mình không thích cái cách mà nó đặt tên cho các biến local của hàm, nhìn thật sự rất khó chịu. Nhưng mà ai thích thì cứ xài thôi vì nó free mà.</p>
+<p><a href="https://binary.ninja"   target="_blank">
+    Binary Ninja</a>: Có trả phí (đắt vl) nhưng offer nhiều chức năng hữu ích và quan trọng nhất là <em>dark theme</em>.</p>
+<p>Ngoài ra thì vẫn còn các decompiler/disassembler khác mà mình chưa có cơ hội tiếp xúc đủ nhiều nhưng mà dưới đây là ảnh so sách các pseudocode của các decompiler/disassembler mà mình yeet được từ reddit.</p>
+<p>
+
+
+
+
+  
+  
+    
+  
+  
+    <figure>
+      
+      <img
+        class="my-0 rounded-md"
+        srcset="
+        /sharing/pwn101/fundamental/decompiler_hu09043481ad6105755e1f984ed438ccfa_336936_330x0_resize_box_3.png 330w,
+        /sharing/pwn101/fundamental/decompiler_hu09043481ad6105755e1f984ed438ccfa_336936_660x0_resize_box_3.png 660w,
+        /sharing/pwn101/fundamental/decompiler_hu09043481ad6105755e1f984ed438ccfa_336936_1024x0_resize_box_3.png 1024w,
+        /sharing/pwn101/fundamental/decompiler_hu09043481ad6105755e1f984ed438ccfa_336936_1320x0_resize_box_3.png 2x"
+        src="/sharing/pwn101/fundamental/decompiler_hu09043481ad6105755e1f984ed438ccfa_336936_660x0_resize_box_3.png"
+        alt="decompiler"
+      />
+      
+      
+    </figure>
+  
+
+</p>
+<h2 class="relative group">Debugger (with plugins) 
+    <div id="debugger-with-plugins" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#debugger-with-plugins" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>Trong quá trình phân tích luồng thực thi hay hành vi của chương trình đối với những input khác nhau thì việc sử dụng các debugger để dừng chương trình nhằm kiểm tra các thanh ghi, bộ nhớ được tổ chức và sắp xếp ra sao là một phần công việc không thể thiếu. Phần lớn thì mọi người sẽ sử dụng <code>gdb</code> nhưng mà chỉ nhiêu đó thôi thì chưa đủ để có cái nhìn tổng quan cũng như là có thể quan sát được chi tiết chương trình tại một thời điểm nhất định được.</p>
+<p>Chính vì vậy mà đối với lựa chọn một plugin phù hợp để bổ trợ cho công đoạn debug thì mình cực kỳ recommend <a href="https://github.com/pwndbg/pwndbg"   target="_blank">
+    pwndbg</a>. Đối với một người đã từng sử dụng qua cả <a href="https://github.com/longld/peda"   target="_blank">
+    PEDA</a> và <a href="https://github.com/hugsy/gef"   target="_blank">
+    GEF</a> rồi quay xe sang pwndbg thì theo đánh giá cá nhân của mình, các tính năng của pwndbg mang lại trải nghiệm tốt hơn rất nhiều.</p>
+<h2 class="relative group">Miscellaneous 
+    <div id="miscellaneous" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#miscellaneous" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>Ngoài những tool cụ thể kể trên thì việc solve các thử thách <code>pwn</code> đôi khi cũng sẽ dùng đến một số tool nhất định khác phù hợp cho các công việc đặc thù cụ thể có thể kể đến như:</p>
+<p><a href="https://www.docker.com"   target="_blank">
+    Docker</a>: Phần lớn các file cho thử thách <code>pwn</code> sẽ được deploy trên remote server với nhiều kiểu config khác nhau nên đôi khi chúng ta phải sử dụng docker dể thiết lập môi trường ở local sao cho giống với remote nhất có thể cũng như lấy về được phiên bản libc mà chương trình sẽ sử dụng.</p>
+<p><a href="https://github.com/io12/pwninit"   target="_blank">
+    pwninit</a>: Sau khi đã có được file libc mà chương trình sẽ sử dụng tại remote server rồi thì làm cách nào để liên kết nó với file chương trình chúng ta đang có ở local thì đây chính là giải pháp.</p>
+<p><a href=""  >
+    ROPgadget</a> và <a href=""  >
+    ropper</a>: 2 tool này chủ yếu để hỗ trợ tìm kiếm các <code>gadget</code>, có những <code>gadget</code> xuất hiện ở tool này nhưng tool kia lại không tìm ra được và ngược lại. Còn nếu như bạn hiện tại vẫn chưa biết <code>gadget</code> là gì thì đừng lo vì các phần sau của series mình sẽ đề cập và giới thiệu đến nó lại.</p>
+<p><a href="https://github.com/david942j/one_gadget"   target="_blank">
+    one_gadget</a>: Tool này giúp tìm kiếm các địa chỉ lệnh mà chỉ cần nhảy tới đó thì sẽ auto chiếm được shell chương trình tuy nhiên drawback của nó là yêu cầu phải thỏa mãn một số điều kiện về giá trị nhất định tại một vài thanh ghi.</p>
+<h1 class="relative group">Last words 
+    <div id="last-words" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#last-words" aria-label="Anchor">#</a>
+    </span>        
+    
+</h1>
+<p>Nhiêu đó là những gì đúc kết được trong suốt quá trình học chơi <code>pwn</code> của mình. Tuy nhiên như đã nói ở đầu bài viết thì những gì mình viết ra chưa chắc đã đúng hết 100% và các bạn muốn dấn thân vào mảng <code>Pwnable</code> cũng không bắt buộc phải nằm hết toàn bộ rồi mới học chơi.</p>
+<p>Mình cũng đã từng chả biết code <em>Python</em> là gì, chả biết mấy cài hàm trong <em>C</em> nó làm việc ra sao cũng như không biết đọc cả <em>assembly</em> nhưng cứ làm tới đâu thì học, nghiên cứu tới đó là ổn.</p>
+<p>Lượng kiến thức để chơi tốt được <code>pwn</code> thì rộng bao la và chắc chắn là không ai có thể nắm hết được trong ngày một ngày hai được nên thứ mình mong muốn có được ở những người chơi <code>pwn</code> chỉ cần là ngọn lửa đam mê cháy mãi không bao giờ tắt là được.</p>
+<p>
+
+
+
+
+  
+  
+    
+  
+  
+    <figure>
+      
+      <img
+        class="my-0 rounded-md"
+        srcset="
+        /sharing/pwn101/fundamental/ending_hu73569982e70314ab75d0159c962f6817_1566654_330x0_resize_box_3.png 330w,
+        /sharing/pwn101/fundamental/ending_hu73569982e70314ab75d0159c962f6817_1566654_660x0_resize_box_3.png 660w,
+        /sharing/pwn101/fundamental/ending_hu73569982e70314ab75d0159c962f6817_1566654_1024x0_resize_box_3.png 1024w,
+        /sharing/pwn101/fundamental/ending_hu73569982e70314ab75d0159c962f6817_1566654_1320x0_resize_box_3.png 2x"
+        src="/sharing/pwn101/fundamental/ending_hu73569982e70314ab75d0159c962f6817_1566654_660x0_resize_box_3.png"
+        alt="end"
+      />
+      
+      
+    </figure>
+  
+
+</p>
 
         </div>
                 
@@ -953,16 +1022,16 @@
     
     <div
         class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-        <a href="https://roundtableofskillissue.github.io/sharing/pwn101/fundamental/">
-            Part 1: Pwn 101: Xây dựng nền tảng
-        </a>
+        Part 1: This Article
     </div>
     
     
     
     <div
         class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-        Part 2: This Article
+        <a href="https://roundtableofskillissue.github.io/sharing/pwn101/buffer_overflow_1/">
+            Part 2: Pwn 101: Buffer Overflow Part 1
+        </a>
     </div>
     
     
@@ -977,8 +1046,8 @@
      
     
      <script>
-        var oid = "views_sharing\\pwn101\\buffer_overflow_1\\index.md"
-        var oid_likes = "likes_sharing\\pwn101\\buffer_overflow_1\\index.md"
+        var oid = "views_sharing\\pwn101\\fundamental\\index.md"
+        var oid_likes = "likes_sharing\\pwn101\\fundamental\\index.md"
       </script>
       
       
@@ -998,30 +1067,30 @@
       <div class="flex justify-between pt-3">
         <span>
           
-            <a class="flex group mr-3" href="/sharing/pwn101/fundamental/">
-              <span
-                class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400"
-                >&larr;</span
-              >
-              <span
-                class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400"
-                >&rarr;</span
-              >
+        </span>
+        <span>
+          
+            <a class="flex text-right group ml-3" href="/sharing/pwn101/buffer_overflow_1/">
               <span class="flex flex-col">
                 <span
                   class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
-                  >Pwn 101: Xây dựng nền tảng</span
+                  >Pwn 101: Buffer Overflow Part 1</span
                 >
                 <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
                   
-                    <time datetime="2024-02-08 15:00:00 &#43;0700 &#43;07">8 February 2024</time>
+                    <time datetime="2024-02-08 15:20:00 &#43;0700 &#43;07">8 February 2024</time>
                   
                 </span>
               </span>
+              <span
+                class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400"
+                >&rarr;</span
+              >
+              <span
+                class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400"
+                >&larr;</span
+              >
             </a>
-          
-        </span>
-        <span>
           
         </span>
       </div>
