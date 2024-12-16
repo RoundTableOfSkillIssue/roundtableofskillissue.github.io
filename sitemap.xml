@@ -3,37 +3,43 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
-    <loc>https://roundtableofskillissue.github.io/sharing/pwn101/buffer_overflow_1/</loc>
-    <lastmod>2024-02-08T15:20:00+07:00</lastmod>
+    <loc>https://roundtableofskillissue.github.io/sharing/cve/cve-2022-1471/</loc>
+    <lastmod>2024-09-15T00:00:00+07:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://roundtableofskillissue.github.io/</loc>
-    <lastmod>2024-02-08T15:20:00+07:00</lastmod>
+    <lastmod>2024-09-15T00:00:00+07:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://roundtableofskillissue.github.io/sharing/</loc>
-    <lastmod>2024-02-08T15:20:00+07:00</lastmod>
+    <lastmod>2024-09-15T00:00:00+07:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://roundtableofskillissue.github.io/sharing/pwn101/fundamental/</loc>
-    <lastmod>2024-02-08T15:00:00+07:00</lastmod>
+    <loc>https://roundtableofskillissue.github.io/sharing/cve/cve-2024-4367/</loc>
+    <lastmod>2024-09-08T00:00:00+07:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://roundtableofskillissue.github.io/writeup/mapna-ctf-2024/</loc>
-    <lastmod>2024-01-21T11:00:00+00:00</lastmod>
+    <loc>https://roundtableofskillissue.github.io/writeup/hackthebox-2024/</loc>
+    <lastmod>2024-03-14T15:20:00+07:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://roundtableofskillissue.github.io/writeup/</loc>
+    <lastmod>2024-03-14T15:20:00+07:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://roundtableofskillissue.github.io/writeup/mapna-ctf-2024/</loc>
     <lastmod>2024-01-21T11:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
