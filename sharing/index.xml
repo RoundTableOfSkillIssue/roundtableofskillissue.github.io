@@ -1,32 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Sharings on RToSI</title>
+    <title>RToSI</title>
     <link>https://roundtableofskillissue.github.io/sharing/</link>
-    <description>Recent content in Sharings on RToSI</description>
+    <description>Recent content on RToSI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>© 2024 Round Table of Skill Issue</copyright>
-    <lastBuildDate>Sun, 15 Sep 2024 00:00:00 +0700</lastBuildDate><atom:link href="https://roundtableofskillissue.github.io/sharing/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>CVE-2022-1471 (SnakeYaml)</title>
-      <link>https://roundtableofskillissue.github.io/sharing/cve/cve-2022-1471/</link>
-      <pubDate>Sun, 15 Sep 2024 00:00:00 +0700</pubDate>
-      
-      <guid>https://roundtableofskillissue.github.io/sharing/cve/cve-2022-1471/</guid>
-      <description>Analysis for CVE-2022-1471 (SnakeYaml)</description>
-      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://roundtableofskillissue.github.io/sharing/cve/cve-2022-1471/featured.png" />
-    </item>
-    
-    <item>
-      <title>CVE-2024-4367 (PDF.js)</title>
-      <link>https://roundtableofskillissue.github.io/sharing/cve/cve-2024-4367/</link>
-      <pubDate>Sun, 08 Sep 2024 00:00:00 +0700</pubDate>
-      
-      <guid>https://roundtableofskillissue.github.io/sharing/cve/cve-2024-4367/</guid>
-      <description>Analysis for CVE-2024-4367 (PDF.js)</description>
-      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://roundtableofskillissue.github.io/sharing/cve/cve-2024-4367/featured.png" />
-    </item>
+    <copyright>© 2025 </copyright>
+    <lastBuildDate>Fri, 18 Oct 2024 00:00:00 +0700</lastBuildDate><atom:link href="https://roundtableofskillissue.github.io/sharing/index.xml" rel="self" type="application/rss+xml" />
     
   </channel>
 </rss>
