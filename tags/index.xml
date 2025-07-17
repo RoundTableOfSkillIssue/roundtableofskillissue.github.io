@@ -2,119 +2,119 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on RToSI</title>
-    <link>/tags/</link>
+    <link>https://roundtableofskillissue.github.io/tags/</link>
     <description>Recent content in Tags on RToSI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© 2025 </copyright>
-    <lastBuildDate>Fri, 18 Oct 2024 00:00:00 +0700</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 18 Oct 2024 00:00:00 +0700</lastBuildDate><atom:link href="https://roundtableofskillissue.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Cve</title>
-      <link>/tags/cve/</link>
+      <link>https://roundtableofskillissue.github.io/tags/cve/</link>
       <pubDate>Fri, 18 Oct 2024 00:00:00 +0700</pubDate>
       
-      <guid>/tags/cve/</guid>
+      <guid>https://roundtableofskillissue.github.io/tags/cve/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Sharing</title>
-      <link>/tags/sharing/</link>
+      <link>https://roundtableofskillissue.github.io/tags/sharing/</link>
       <pubDate>Fri, 18 Oct 2024 00:00:00 +0700</pubDate>
       
-      <guid>/tags/sharing/</guid>
+      <guid>https://roundtableofskillissue.github.io/tags/sharing/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>2024</title>
-      <link>/tags/2024/</link>
+      <link>https://roundtableofskillissue.github.io/tags/2024/</link>
       <pubDate>Thu, 14 Mar 2024 15:20:00 +0700</pubDate>
       
-      <guid>/tags/2024/</guid>
+      <guid>https://roundtableofskillissue.github.io/tags/2024/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Hackthebox</title>
-      <link>/tags/hackthebox/</link>
+      <link>https://roundtableofskillissue.github.io/tags/hackthebox/</link>
       <pubDate>Thu, 14 Mar 2024 15:20:00 +0700</pubDate>
       
-      <guid>/tags/hackthebox/</guid>
+      <guid>https://roundtableofskillissue.github.io/tags/hackthebox/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Pwn</title>
-      <link>/tags/pwn/</link>
+      <link>https://roundtableofskillissue.github.io/tags/pwn/</link>
       <pubDate>Thu, 14 Mar 2024 15:20:00 +0700</pubDate>
       
-      <guid>/tags/pwn/</guid>
+      <guid>https://roundtableofskillissue.github.io/tags/pwn/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Ctf</title>
-      <link>/tags/ctf/</link>
+      <link>https://roundtableofskillissue.github.io/tags/ctf/</link>
       <pubDate>Sun, 21 Jan 2024 11:00:00 +0000</pubDate>
       
-      <guid>/tags/ctf/</guid>
+      <guid>https://roundtableofskillissue.github.io/tags/ctf/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>MAPNA</title>
-      <link>/tags/mapna/</link>
+      <link>https://roundtableofskillissue.github.io/tags/mapna/</link>
       <pubDate>Sun, 21 Jan 2024 11:00:00 +0000</pubDate>
       
-      <guid>/tags/mapna/</guid>
+      <guid>https://roundtableofskillissue.github.io/tags/mapna/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>2023</title>
-      <link>/tags/2023/</link>
+      <link>https://roundtableofskillissue.github.io/tags/2023/</link>
       <pubDate>Sat, 11 Nov 2023 00:00:00 +0000</pubDate>
       
-      <guid>/tags/2023/</guid>
+      <guid>https://roundtableofskillissue.github.io/tags/2023/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>BKISC</title>
-      <link>/tags/bkisc/</link>
+      <link>https://roundtableofskillissue.github.io/tags/bkisc/</link>
       <pubDate>Sat, 11 Nov 2023 00:00:00 +0000</pubDate>
       
-      <guid>/tags/bkisc/</guid>
+      <guid>https://roundtableofskillissue.github.io/tags/bkisc/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Osint</title>
-      <link>/tags/osint/</link>
+      <link>https://roundtableofskillissue.github.io/tags/osint/</link>
       <pubDate>Tue, 02 May 2023 03:50:54 +0000</pubDate>
       
-      <guid>/tags/osint/</guid>
+      <guid>https://roundtableofskillissue.github.io/tags/osint/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>UMDCTF</title>
-      <link>/tags/umdctf/</link>
+      <link>https://roundtableofskillissue.github.io/tags/umdctf/</link>
       <pubDate>Tue, 02 May 2023 03:50:54 +0000</pubDate>
       
-      <guid>/tags/umdctf/</guid>
+      <guid>https://roundtableofskillissue.github.io/tags/umdctf/</guid>
       <description></description>
       
     </item>

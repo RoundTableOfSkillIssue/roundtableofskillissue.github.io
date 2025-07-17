@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>BaoDoktah on RToSI</title>
-    <link>/authors/baodoktah/</link>
+    <link>https://roundtableofskillissue.github.io/authors/baodoktah/</link>
     <description>Recent content in BaoDoktah on RToSI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© 2025 </copyright>
-    <lastBuildDate>Sat, 06 Dec 2003 00:00:00 +0700</lastBuildDate><atom:link href="/authors/baodoktah/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 Dec 2003 00:00:00 +0700</lastBuildDate><atom:link href="https://roundtableofskillissue.github.io/authors/baodoktah/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>UMDCTF 2023 - TCC1-4 writeup</title>
-      <link>/writeup/umd-osint/</link>
+      <link>https://roundtableofskillissue.github.io/writeup/umd-osint/</link>
       <pubDate>Tue, 02 May 2023 03:50:54 +0000</pubDate>
       
-      <guid>/writeup/umd-osint/</guid>
+      <guid>https://roundtableofskillissue.github.io/writeup/umd-osint/</guid>
       <description>An in-depth writeup on UMDCTF 2023 - TCC1-4.</description>
-      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="/writeup/umd-osint/featured.png" />
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://roundtableofskillissue.github.io/writeup/umd-osint/featured.png" />
     </item>
     
   </channel>
