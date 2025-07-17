@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Authors on RToSI</title>
+    <title>Team Members on RToSI</title>
     <link>https://roundtableofskillissue.github.io/authors/</link>
-    <description>Recent content in Authors on RToSI</description>
+    <description>Recent content in Team Members on RToSI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>© 2024 Round Table of Skill Issue</copyright>
-    <lastBuildDate>Sun, 15 Sep 2024 00:00:00 +0700</lastBuildDate><atom:link href="https://roundtableofskillissue.github.io/authors/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>© 2025 </copyright>
+    <lastBuildDate>Mon, 01 Jan 2024 00:00:00 +0700</lastBuildDate><atom:link href="https://roundtableofskillissue.github.io/authors/index.xml" rel="self" type="application/rss+xml" />
+    
     <item>
       <title>BaoDoktah</title>
       <link>https://roundtableofskillissue.github.io/authors/baodoktah/</link>
@@ -34,7 +35,7 @@
       <pubDate>Wed, 26 Mar 2003 00:00:00 +0700</pubDate>
       
       <guid>https://roundtableofskillissue.github.io/authors/lio/</guid>
-      <description>Woah! Một páo-ner hoang dã đã xuất hiện!</description>
+      <description>Woah! A wild pwner has appeared!</description>
       
     </item>
     
