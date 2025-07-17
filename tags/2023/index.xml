@@ -1,1 +1,33 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>2023 on RToSI</title><link>https://roundtableofskillissue.github.io/tags/2023/</link><description>Recent content in 2023 on RToSI</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© 2025</copyright><lastBuildDate>Sat, 11 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://roundtableofskillissue.github.io/tags/2023/index.xml" rel="self" type="application/rss+xml"/><item><title>BKISC Recruitment CTF - PWN writeup</title><link>https://roundtableofskillissue.github.io/writeup/bkisc_recruit/</link><pubDate>Sat, 11 Nov 2023 00:00:00 +0000</pubDate><guid>https://roundtableofskillissue.github.io/writeup/bkisc_recruit/</guid><description>Writeup cho các thử thách mảng pwnable của giải CTF tuyển quân CLB ATTT BKISC.</description><media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://roundtableofskillissue.github.io/writeup/bkisc_recruit/featured.jpg"/></item><item><title>UMDCTF 2023 - TCC1-4 writeup</title><link>https://roundtableofskillissue.github.io/writeup/umd-osint/</link><pubDate>Tue, 02 May 2023 03:50:54 +0000</pubDate><guid>https://roundtableofskillissue.github.io/writeup/umd-osint/</guid><description>An in-depth writeup on UMDCTF 2023 - TCC1-4.</description><media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://roundtableofskillissue.github.io/writeup/umd-osint/featured.png"/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2023 on RToSI</title>
+    <link>https://roundtableofskillissue.github.io/tags/2023/</link>
+    <description>Recent content in 2023 on RToSI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© 2025 </copyright>
+    <lastBuildDate>Sat, 11 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://roundtableofskillissue.github.io/tags/2023/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>BKISC Recruitment CTF - PWN writeup</title>
+      <link>https://roundtableofskillissue.github.io/writeup/bkisc_recruit/</link>
+      <pubDate>Sat, 11 Nov 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://roundtableofskillissue.github.io/writeup/bkisc_recruit/</guid>
+      <description>Writeup cho các thử thách mảng pwnable của giải CTF tuyển quân CLB ATTT BKISC.</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://roundtableofskillissue.github.io/writeup/bkisc_recruit/featured.jpg" />
+    </item>
+    
+    <item>
+      <title>UMDCTF 2023 - TCC1-4 writeup</title>
+      <link>https://roundtableofskillissue.github.io/writeup/umd-osint/</link>
+      <pubDate>Tue, 02 May 2023 03:50:54 +0000</pubDate>
+      
+      <guid>https://roundtableofskillissue.github.io/writeup/umd-osint/</guid>
+      <description>An in-depth writeup on UMDCTF 2023 - TCC1-4.</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://roundtableofskillissue.github.io/writeup/umd-osint/featured.png" />
+    </item>
+    
+  </channel>
+</rss>
