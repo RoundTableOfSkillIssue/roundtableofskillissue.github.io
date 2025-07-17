@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Team Members on RToSI</title>
+    <link>https://roundtableofskillissue.github.io/authors/</link>
+    <description>Recent content in Team Members on RToSI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© 2025 </copyright>
+    <lastBuildDate>Mon, 01 Jan 2024 00:00:00 +0700</lastBuildDate><atom:link href="https://roundtableofskillissue.github.io/authors/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>BaoDoktah</title>
+      <link>https://roundtableofskillissue.github.io/authors/baodoktah/</link>
+      <pubDate>Sat, 06 Dec 2003 00:00:00 +0700</pubDate>
+      
+      <guid>https://roundtableofskillissue.github.io/authors/baodoktah/</guid>
+      <description>Misc and OSINT enjoyer</description>
+      
+    </item>
+    
+    <item>
+      <title>Ntc</title>
+      <link>https://roundtableofskillissue.github.io/authors/ntc/</link>
+      <pubDate>Wed, 09 Jul 2003 00:00:00 +0700</pubDate>
+      
+      <guid>https://roundtableofskillissue.github.io/authors/ntc/</guid>
+      <description>Weeber</description>
+      
+    </item>
+    
+    <item>
+      <title>Lio</title>
+      <link>https://roundtableofskillissue.github.io/authors/lio/</link>
+      <pubDate>Wed, 26 Mar 2003 00:00:00 +0700</pubDate>
+      
+      <guid>https://roundtableofskillissue.github.io/authors/lio/</guid>
+      <description>Woah! A wild pwner has appeared!</description>
+      
+    </item>
+    
+  </channel>
+</rss>
