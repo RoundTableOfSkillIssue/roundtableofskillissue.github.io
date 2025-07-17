@@ -2,42 +2,32 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>RToSI</title>
-    <link>https://roundtableofskillissue.github.io/sharing/cve/</link>
+    <link>http://localhost:1313/sharing/cve/</link>
     <description>Recent content on RToSI</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
-    <copyright>© 2025 </copyright>
-    <lastBuildDate>Fri, 18 Oct 2024 00:00:00 +0700</lastBuildDate><atom:link href="https://roundtableofskillissue.github.io/sharing/cve/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Fri, 18 Oct 2024 00:00:00 +0700</lastBuildDate>
+    <atom:link href="http://localhost:1313/sharing/cve/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CVE-2024-32002 (Git)</title>
-      <link>https://roundtableofskillissue.github.io/sharing/cve/cve-2024-32002/</link>
+      <link>http://localhost:1313/sharing/cve/cve-2024-32002/</link>
       <pubDate>Fri, 18 Oct 2024 00:00:00 +0700</pubDate>
-      
-      <guid>https://roundtableofskillissue.github.io/sharing/cve/cve-2024-32002/</guid>
+      <guid>http://localhost:1313/sharing/cve/cve-2024-32002/</guid>
       <description>Analysis for CVE-2024-32002 (Git)</description>
-      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://roundtableofskillissue.github.io/sharing/cve/cve-2024-32002/featured.png" />
     </item>
-    
     <item>
       <title>CVE-2022-1471 (SnakeYaml)</title>
-      <link>https://roundtableofskillissue.github.io/sharing/cve/cve-2022-1471/</link>
+      <link>http://localhost:1313/sharing/cve/cve-2022-1471/</link>
       <pubDate>Sun, 15 Sep 2024 00:00:00 +0700</pubDate>
-      
-      <guid>https://roundtableofskillissue.github.io/sharing/cve/cve-2022-1471/</guid>
+      <guid>http://localhost:1313/sharing/cve/cve-2022-1471/</guid>
       <description>Analysis for CVE-2022-1471 (SnakeYaml)</description>
-      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://roundtableofskillissue.github.io/sharing/cve/cve-2022-1471/featured.png" />
     </item>
-    
     <item>
       <title>CVE-2024-4367 (PDF.js)</title>
-      <link>https://roundtableofskillissue.github.io/sharing/cve/cve-2024-4367/</link>
+      <link>http://localhost:1313/sharing/cve/cve-2024-4367/</link>
       <pubDate>Sun, 08 Sep 2024 00:00:00 +0700</pubDate>
-      
-      <guid>https://roundtableofskillissue.github.io/sharing/cve/cve-2024-4367/</guid>
+      <guid>http://localhost:1313/sharing/cve/cve-2024-4367/</guid>
       <description>Analysis for CVE-2024-4367 (PDF.js)</description>
-      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://roundtableofskillissue.github.io/sharing/cve/cve-2024-4367/featured.png" />
     </item>
-    
   </channel>
 </rss>
